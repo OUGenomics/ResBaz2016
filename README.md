@@ -9,26 +9,25 @@ IT MAY BE POSSIBLE FOR YOU TO REPRODUCE THIS BY INSTALLING
 Boot2Docker AND TO RUN THIS TUTORIAL LOCALLY i.e. ON YOUR LAPTOP.
 IF YOU ARE USING A LINUX MACHINE, MAKE SURE TO INSTALL DOCKER FIRST.
 
-- The first thing you need in order to run qiime is to install a reference database. 
-- I typically use the Silva111 database for 16S. The following commands allow you to install
-- Silva111.  I have already done this for you under /data/static/sequence_data/ResBaz
+--------
+To get started, open a terminal window and ssh into my VM. Use your appropriate login info.
+For the purpose of this tutorial, I'm assuming you are 'student01'.
 
-```sh 
-mkdir -p /data/DATABASES/16S
-cd /data/DATABASES/16S
-wget http://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_111_release.tgz
-tar -xvf Silva_111_release.tgz
-cd Silva_111_post/rep_set_aligned
-gunzip *cd ..
-cd rep_set
-gunzip *
+```sh
+ ssh -l student01 mgmic.oscer.ou.edu
 ```
 
+Enter the password provided by me, and then navigate to your data directory.
+
+```sh
+cd /data/static/sequence_data/RESBAZ/student01
+```
+ 
 - Download the docker bwawrik/qiime:latest and launch it, mounting the data directory
 
 ```sh
 docker pull bwawrik/qiime:latest
-docker run -t -i -v ~/data:/data bwawrik/qiime:latest
+docker run -t -i -v /data/static/sequence_data/RESBAZ:/data bwawrik/qiime:latest
 ```
 
 - Deploy usearch version 5.2.236 and 6.1.544. Qiime does not use the latest version of usearch and will throw an error if you try to use it. Since this software has to be licensed, so I can not include it in the docker, which is in a public repository.  Run the following commands to install usearch licensed to the Wawrik lab. Please get your own license for free from the programs website, if you are going to do this beyond the tutorial described here.
@@ -130,6 +129,21 @@ scp -r root@45.55.160.193:/data/cdout/* ~/Desktop/
 ### QIIME ANALYSIS USING SILVA 111
 
 The commands above use a closed reference OTU picking approach with a pre-deployed version of Greengenes at 90% identity. Lets Do this with Silva 111 and open reference picking now.  
+
+The first thing you need in order to run qiime is to install a reference database. 
+I typically use the Silva111 database for 16S. The following commands allow you to install
+Silva111.  I have already done this for you under /data/static/sequence_data/ResBaz
+
+```sh 
+mkdir -p /data/DATABASES/16S
+cd /data/DATABASES/16S
+wget http://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_111_release.tgz
+tar -xvf Silva_111_release.tgz
+cd Silva_111_post/rep_set_aligned
+gunzip *cd ..
+cd rep_set
+gunzip *
+```
 
 
 - Download the parameters file needed for running the analysis using Silva
