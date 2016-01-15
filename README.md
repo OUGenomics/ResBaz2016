@@ -2,13 +2,16 @@
 
 IMPORTANT:
 THIS TUTORIAL WILL NOT RUN WITH LESS THAN 4GB OF RAM.
-RUN A VM OR LOCAL MACHINE WITH THE APPROPRIATE MEMORY SIZE.
-ALTERNATIVELY, INSTALL Boot2Docker AND RUN THIS TUTORIAL LOCALLY.
+WE WILL BE RUNNING THIS ON MY VM AT MGMIC.OSCER.OU.EDU. 
+IF YOU TRY TO REPRODUCE THIS ON ANOTHER MACHINE, MAKE SURE
+IT HAS THE APPROPRIATE MEMORY SIZE. 
+IT MAY BE POSSIBLE FOR YOU TO REPRODUCE THIS BY INSTALLING
+Boot2Docker AND TO RUN THIS TUTORIAL LOCALLY i.e. ON YOUR LAPTOP.
+IF YOU ARE USING A LINUX MACHINE, MAKE SURE TO INSTALL DOCKER FIRST.
 
--
-
-- Launch an appropriately sized VM
-- Install the Silva111 database if its not installed yet
+- The first thing you need in order to run qiime is to install a reference database. 
+- I typically use the Silva111 database for 16S. The following commands allow you to install
+- Silva111.  I have already done this for you under /data/static/sequence_data/ResBaz
 
 ```sh 
 mkdir -p /data/DATABASES/16S
@@ -128,19 +131,6 @@ scp -r root@45.55.160.193:/data/cdout/* ~/Desktop/
 
 The commands above use a closed reference OTU picking approach with a pre-deployed version of Greengenes at 90% identity. Lets Do this with Silva 111 and open reference picking now.  
 
-- Start by deploying the Silva111 database:
-
-```sh
-mkdir -p /data/DATABASES/16S
-cd /data/DATABASES/16S
-wget http://www.arb-silva.de/fileadmin/silva_databases/qiime/Silva_111_release.tgz
-tar -xvf Silva_111_release.tgz
-cd Silva_111_post/rep_set_aligned
-gunzip *
-cd ..
-cd rep_set
-gunzip *
-```
 
 - Download the parameters file needed for running the analysis using Silva
 
