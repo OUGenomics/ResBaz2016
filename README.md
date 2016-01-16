@@ -48,9 +48,11 @@ sh install_usearch.sh
 You can check if usearch is installed correctly by simply typing
 >usearch
 
-The install_usearch.sh shell script contains several command, which you could run manually as follows: 
+The install_usearch.sh shell script contains several commands, which you could run manually as follows (do not do this now): 
 
->mkdir -p /opt/local/software/usearch cd /opt/local/software/usearch wget >http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch5.2.236_i86linux32wget >http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch6.1.544_i86linux32chmod 777 * cd /usr/local/bin ln -s >/opt/local/software/usearch/usearch5.2.236_i86linux32 ./usearch ln -s /opt/local/software/usearch/usearch6.1.544_i86linux32 ./usearch61
+```sh
+mkdir -p /opt/local/software/usearch cd /opt/local/software/usearch wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch5.2.236_i86linux32wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch6.1.544_i86linux32chmod 777 * cd /usr/local/bin ln -s /opt/local/software/usearch/usearch5.2.236_i86linux32 ./usearch ln -s /opt/local/software/usearch/usearch6.1.544_i86linux32 ./usearch61
+```
 
 Now change your directory to /data, dowload the tutorial sample data & mapping file, and unzip the files
 
@@ -77,7 +79,7 @@ sample2    CAACACGT    CAAGAGTTTGATCCTGGCTCAG    tag    none
 sample3    CAACAGCT    CAAGAGTTTGATCCTGGCTCAG    tag    none
 ```
 
-- Now Check the mappigng file for errors
+Now Check the mappigng file for errors
 
 ```sh
 validate_mapping_file.py -m GoM_Sept_Mapping.txt -o mapping_output -v
@@ -137,11 +139,9 @@ http://mgmic.oscer.ou.edu/sequence_data/RESBAZ/student01/cdout/
 
 ### QIIME ANALYSIS USING SILVA 111
 
-The commands above use a closed reference OTU picking approach with a pre-deployed version of Greengenes at 90% identity. Lets Do this with Silva 111 and open reference picking now.  
+The commands above use a closed reference OTU picking approach with a pre-deployed version of Greengenes at 90% identity. This is not always optimal.  For amplicon, I prefer open reference OTU picking with Silva 111 (or later).  
 
-The first thing you need in order to run qiime is to install a reference database. 
-I typically use the Silva111 database for 16S. The following commands allow you to install
-Silva111.  I have already done this for you under /data/static/sequence_data/ResBaz
+The following commands allow you to install  Silva111.  I have already done this for you under /data/static/sequence_data/ResBaz/DATABASES so you will not need to execute the following commands
 
 ```sh 
 mkdir -p /data/DATABASES/16S
@@ -155,20 +155,19 @@ cd rep_set
 gunzip *
 ```
 
-
-- Download the parameters file needed for running the analysis using Silva
+Download the parameters file needed for running the analysis using Silva
 
 ```sh
 wget https://github.com/bwawrik/MBIO5810/raw/master/sequence_data/qiime_parameters_silva111.par
 ```
 
-- Pick your OTUs
+Pick your OTUs
 
 ```sh
 pick_de_novo_otus.py -i processed_seqs/Split_Output/seqs.fna -o OTUs_silva -p qiime_parameters_silva111.par
 ```
 
-- Inspect the BIOM file
+Inspect the BIOM file
 
 ```sh
 biom summarize-table -i OTUs_silva/otu_table.biom 
