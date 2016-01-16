@@ -16,13 +16,7 @@ For the purpose of this tutorial, I'm assuming you are 'student01'.
 ```sh
 ssh -l student01 mgmic.oscer.ou.edu
 ```
-
 Enter the password I provide during the workshop.
-Then navigate to your data directory.
-
-```sh
-cd /data/static/sequence_data/RESBAZ/student01
-```
 
 Running a docker repo usually requires that you first download the docker file to your server.  I have already done this for you, so you don't need to worry about this.  However, if you are using Boot2Docker or your own linux machine, you may pull the docker with the following command (do not do this now):
 
@@ -43,26 +37,27 @@ Navigate to your data directory
 cd /data
 ```
 
-- Deploy usearch version 5.2.236 and 6.1.544. Qiime does not use the latest version of usearch and will throw an error if you try to use it. Since this software has to be licensed, so I can not include it in the docker, which is in a public repository.  Run the following commands to install usearch licensed to the Wawrik lab. Please get your own license for free from the programs website, if you are going to do this beyond the tutorial described here.
+- Deploy usearch version 5.2.236 and 6.1.544. Qiime does not use the latest version of usearch and will throw an error if you try. Since this software has to be licensed, I cannot include it in the docker, which is in a public repository.  Run the following commands to install usearch licensed to the Wawrik lab. Please keep in mind that you will need to get your own license (free), if you are going to use my docker beyond the tutorial described here.
 
 ```sh
 wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/install_usearch.sh
 sh install_usearch.sh
 ```
+You can check if usearch is installed correctly by simply typing
+>usearch
 
-- The install_usearch.sh shell script contain the following commands, in case you want to do this manually:
+The install_usearch.sh shell script contains several command, which you could run manually as follows: 
 
-```sh
-mkdir -p /opt/local/software/usearch cd /opt/local/software/usearch wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch5.2.236_i86linux32wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch6.1.544_i86linux32chmod 777 * cd /usr/local/bin ln -s /opt/local/software/usearch/usearch5.2.236_i86linux32 ./usearch ln -s /opt/local/software/usearch/usearch6.1.544_i86linux32 ./usearch61
-```
+>mkdir -p /opt/local/software/usearch cd /opt/local/software/usearch wget >http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch5.2.236_i86linux32wget >http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch6.1.544_i86linux32chmod 777 * cd /usr/local/bin ln -s >/opt/local/software/usearch/usearch5.2.236_i86linux32 ./usearch ln -s /opt/local/software/usearch/usearch6.1.544_i86linux32 ./usearch61
 
-- Change your directory to /data and dowload sample data as well the mapping file
+- Now change your directory to /data, dowload the tutorial sample data & mapping file, and unzip the files
 
 ```sh
 cd /data
 wget https://github.com/bwawrik/MBIO5810/raw/master/sequence_data/GOM_R1.fastq.gz
 wget https://github.com/bwawrik/MBIO5810/raw/master/sequence_data/GOM_R2.fastq.gz
 wget https://github.com/bwawrik/MBIO5810/raw/master/sequence_data/GoM_Sept_Mapping.txt
+gunzip *.gz
 ```
 
 - Lets look at the mapping file
