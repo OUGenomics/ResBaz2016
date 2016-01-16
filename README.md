@@ -39,7 +39,7 @@ Navigate to your data directory
 cd /data
 ```
 
-- Deploy usearch version 5.2.236 and 6.1.544. Qiime does not use the latest version of usearch and will throw an error if you try. Since this software has to be licensed, I cannot include it in the docker, which is in a public repository.  Run the following commands to install usearch licensed to the Wawrik lab. Please keep in mind that you will need to get your own license (free), if you are going to use my docker beyond the tutorial described here.
+Deploy usearch version 5.2.236 and 6.1.544. Qiime does not use the latest version of usearch and will throw an error if you try. Since this software has to be licensed, I cannot include it in the docker, which is in a public repository.  Run the following commands to install usearch licensed to the Wawrik lab. Please keep in mind that you will need to get your own license (free), if you are going to use my docker beyond the tutorial described here.
 
 ```sh
 wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/install_usearch.sh
