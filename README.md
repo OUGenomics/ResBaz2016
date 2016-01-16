@@ -175,16 +175,17 @@ biom summarize-table -i OTUs_silva/otu_table.biom
 
 Look at the number of sequences in each sample.  In the next command you need to set the '-e' parameter, which is the sampling depth for rarefaction.  'e' should not exceed the lowest number in the result form this command.
 
-- Run QIIME core diversity analysis
+Run QIIME core diversity analysis
 
 ```sh
 core_diversity_analyses.py -o cdout_silva/ -i  OTUs_silva/otu_table.biom -m GoM_Sept_Mapping.txt -t OTUs_silva/rep_set.tre -e 20
 ```
 
-- Retrieving your output after logging out of your VM. If you are using a PC, use an FTP program to retrieve your files.
+To view your output, open a web browser and enter the following URL:
 
 ```sh
-scp -r root@45.55.160.193:/data/cdout_silva/* ~/Desktop/
+http://mgmic.oscer.ou.edu/sequence_data/RESBAZ/student01/cdout_silva/
 ```
 
-Which analysis is faster ? Which produces better results ? Why ?
+
+Which analysis was faster ? Which produces better results ? Why ?
