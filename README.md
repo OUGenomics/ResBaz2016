@@ -26,9 +26,7 @@ cd /data/static/sequence_data/RESBAZ/student01
 
 Running a docker repo usually requires that you first download the docker file to your server.  I have already done this for you, so you don't need to worry about this.  However, if you are using Boot2Docker or your own linux machine, you may pull the docker with the following command (do not do this now):
 
-```sh
-docker pull bwawrik/qiime:latest
-```
+>docker pull bwawrik/qiime:latest
 
 You will now need to launch the docker and mount you data directories.  You can do this by simply typing 
 
@@ -36,7 +34,14 @@ You will now need to launch the docker and mount you data directories.  You can 
 sh qiime
 ```
 The shell script executes the following docker command:
->docker run -t -i -v /data/static/sequence_data/RESBAZ:/data bwawrik/qiime:latest
+>docker run -t -i -v /data/static/sequence_data/RESBAZ/student01:/data -v /data/static/sequence_data/RESBAZ/DATABASES:/data/DATABASES bwawrik/qiime:latest
+The command mounts your data directory as well as the SILVA database (we'll need this below).
+
+Navigate to your data directory
+
+```sh
+cd /data
+```
 
 - Deploy usearch version 5.2.236 and 6.1.544. Qiime does not use the latest version of usearch and will throw an error if you try to use it. Since this software has to be licensed, so I can not include it in the docker, which is in a public repository.  Run the following commands to install usearch licensed to the Wawrik lab. Please get your own license for free from the programs website, if you are going to do this beyond the tutorial described here.
 
