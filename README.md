@@ -28,7 +28,9 @@ You will now need to launch the docker and mount you data directories.  You can 
 sh qiime
 ```
 The shell script executes the following docker command:
+
 >docker run -t -i -v /data/static/sequence_data/RESBAZ/student01:/data -v /data/static/sequence_data/RESBAZ/DATABASES:/data/DATABASES bwawrik/qiime:latest
+
 The command mounts your data directory as well as the SILVA database (we'll need this below).
 
 Navigate to your data directory
@@ -50,7 +52,7 @@ The install_usearch.sh shell script contains several command, which you could ru
 
 >mkdir -p /opt/local/software/usearch cd /opt/local/software/usearch wget >http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch5.2.236_i86linux32wget >http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch6.1.544_i86linux32chmod 777 * cd /usr/local/bin ln -s >/opt/local/software/usearch/usearch5.2.236_i86linux32 ./usearch ln -s /opt/local/software/usearch/usearch6.1.544_i86linux32 ./usearch61
 
-- Now change your directory to /data, dowload the tutorial sample data & mapping file, and unzip the files
+Now change your directory to /data, dowload the tutorial sample data & mapping file, and unzip the files
 
 ```sh
 cd /data
@@ -60,11 +62,12 @@ wget https://github.com/bwawrik/MBIO5810/raw/master/sequence_data/GoM_Sept_Mappi
 gunzip *.gz
 ```
 
-- Lets look at the mapping file
+Look at the mapping file
 
 ```sh
 cat GoM_Sept_Mapping.txt
 ```
+
 the file should be in the following format:
 ```sh
 #SampleID    BarcodeSequence    LinkerPrimerSequence    Area    Description
@@ -83,9 +86,7 @@ cat mapping_output/GoM_Sept_Mapping.log
 
 - You should get an output saying that :
 
-```sh
-"No errors or warnings found in mapping file"
-```
+>No errors or warnings found in mapping file
 
 - Join the fastq files to stich reads together (Note: p: percent maximum difference; m: minimum overlap; o: output directory)
 
@@ -93,14 +94,15 @@ cat mapping_output/GoM_Sept_Mapping.log
 fastq-join  GOM_R1.fastq  GOM_R2.fastq -p 3 -m 50 -o GoM_16S_Sept.fastq
 mv  GoM_16S_Sept.fastqjoin  GoM_16S_Sept.fastq
 ```
+Do you understand the output of the fastq-join command ?
 
-- Extract your reads and barcodes
+Extract your reads and barcodes
 
 ```sh
 extract_barcodes.py -f GoM_16S_Sept.fastq -m GoM_Sept_Mapping.txt --attempt_read_reorientation -l 12 -o processed_seqs
 ```
 
-- Split libraries
+Split your libraries based on the barcodes that are found in the sequences
 
 ```sh
 split_libraries_fastq.py -i processed_seqs/reads.fastq -b processed_seqs/barcodes.fastq -m  GoM_Sept_Mapping.txt -o processed_seqs/Split_Output/ --barcode_type 12
@@ -108,30 +110,29 @@ split_libraries_fastq.py -i processed_seqs/reads.fastq -b processed_seqs/barcode
 
 ### DEFAULT QIIME ANALYSIS USING GREENGENES
 
-- Pick your OTUs
+Pick your OTUs using default parameters
 
 ```sh
 pick_open_reference_otus.py -i processed_seqs/Split_Output/seqs.fna -o OTUs
 ```
 
-- Inspect the BIOM file
+Inspect the BIOM file
 
 ```sh
 biom summarize-table -i OTUs/otu_table_mc2_w_tax_no_pynast_failures.biom
 ```
+Do you understand the output ?
 
-- Run QIIME core diversity analysis
+Run QIIME core diversity analysis
 
 ```sh
 core_diversity_analyses.py -o cdout/ -i  OTUs/otu_table_mc2_w_tax_no_pynast_failures.biom -m GoM_Sept_Mapping.txt -t OTUs/rep_set.tre -e 20
 ```
 
-- Retrieving your output
-
-Log out of your VM.  Then use secure copy (scp) to retrieve your files to your local drive. In this example, I used a droplet with the IP 45.55.160.193 and retrieved the files to my desktop on my macbook.  Make sure you replace this with the IP for your droplet. If you are using a PC, use an FTP program to retrieve your files.
+To view your output, open a web browser and enter the following URL:
 
 ```sh
-scp -r root@45.55.160.193:/data/cdout/* ~/Desktop/
+http://mgmic.oscer.ou.edu/sequence_data/RESBAZ/student01/cdout/
 ```
 
 ### QIIME ANALYSIS USING SILVA 111
