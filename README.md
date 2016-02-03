@@ -51,17 +51,11 @@ You can check if usearch is installed correctly by simply typing
 The install_usearch.sh shell script contains several commands, which you could run manually as follows (do NOT do this now)
 
 >mkdir -p /opt/local/software/usearch cd /opt/local/software/usearch 
-
 >wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch5.2.236_i86linux32
-
 >wget http://mgmic.oscer.ou.edu/sequence_data/tutorials/usearch6.1.544_i86linux32
-
 >chmod 777 * 
-
 >cd /usr/local/bin 
-
 >ln -s /opt/local/software/usearch/usearch5.2.236_i86linux32 ./usearch 
-
 >ln -s /opt/local/software/usearch/usearch6.1.544_i86linux32 ./usearch61
 
 Now change your directory to /data, dowload the tutorial sample data & mapping file, and unzip the files
