@@ -25,7 +25,7 @@ Running a docker repo usually requires that you first download the docker file t
 You will now need to launch the docker and mount you data directories.  You can do this by simply typing 
 
 ```sh
-sh qiime
+sh qiime.sh
 ```
 The shell script executes the following docker command:
 
